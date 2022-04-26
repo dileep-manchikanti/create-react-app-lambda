@@ -1,50 +1,29 @@
-import React, { Component } from "react"
-import logo from "./logo.svg"
-import "./App.css"
+import './App.css';
+import React from 'react';
+import {BrowserRouter} from 'react-router-dom';
+import Main from './components/mainComponent';
 
-class LambdaDemo extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { loading: false, msg: null }
-  }
-
-  handleClick = api => e => {
-    e.preventDefault()
-
-    this.setState({ loading: true })
-    fetch("/.netlify/functions/" + api)
-      .then(response => response.json())
-      .then(json => this.setState({ loading: false, msg: json.msg }))
-  }
-
-  render() {
-    const { loading, msg } = this.state
-
-    return (
-      <p>
-        <button onClick={this.handleClick("hello")}>{loading ? "Loading..." : "Call Lambda"}</button>
-        <button onClick={this.handleClick("async-dadjoke")}>{loading ? "Loading..." : "Call Async Lambda"}</button>
-        <br />
-        <span>{msg}</span>
-      </p>
-    )
-  }
-}
-
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <LambdaDemo />
-        </header>
+// import {fetch} from 'cross-fetch';
+// const options = {
+// 	method: 'GET',
+// 	headers: {
+// 		'X-RapidAPI-Host': 'movies-app1.p.rapidapi.com',
+// 		'X-RapidAPI-Key': 'fa716db22dmshbfc9d7bfcfa55cdp1f6addjsn05f1a6bd08e8'
+// 	}
+// };
+// Initialize Firebase
+function App(){
+  
+    return(
+      <div>
+        <BrowserRouter>
+        <div className='App'>
+          <Main />
+        </div>
+        </BrowserRouter>
       </div>
-    )
-  }
+      
+    );
 }
 
-export default App
+export default App;
